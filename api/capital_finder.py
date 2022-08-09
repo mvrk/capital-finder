@@ -19,12 +19,11 @@ class handler(BaseHTTPRequestHandler):
             message = f"The capital of {country} is {capital_name}"
         elif capital:
             url = f"https://restcountries.com/v3.1/capital/{capital}"
-            res = requests.get(url)
             data = requests.get(url).json()
             country_name = data[0]["name"]["official"]
             message = f"{capital} is the capital of {country_name}"
         else:
-            message = "please input a correct name"
+            message = "please follow format 'country=name' or 'city=name', and input existed names to query."
 
         self.send_response(200)
         self.send_header("content-type", "text/plain")
